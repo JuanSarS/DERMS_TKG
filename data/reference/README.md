@@ -1,0 +1,1 @@
+Modelos IEEE13 y exportación CIM100 aportados por el usuario en `KG_example_08142026(1).zip`. El archivo RDF/XML declara IEC61970CIM100 (2019-04-01). No es un feeder sincronizado con Ausgrid. Esta es una copia de referencia, no se modifica el original.

@@ -1,0 +1,1047 @@
+{
+  "rows": [
+    {
+      "step": 1,
+      "timestamp": "2011-06-30T14:00:00Z",
+      "load_kw": 0.392,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.392,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 2,
+      "timestamp": "2011-06-30T14:30:00Z",
+      "load_kw": 0.578,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.578,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 3,
+      "timestamp": "2011-06-30T15:00:00Z",
+      "load_kw": 0.568,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.568,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 4,
+      "timestamp": "2011-06-30T15:30:00Z",
+      "load_kw": 0.482,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.482,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 5,
+      "timestamp": "2011-06-30T16:00:00Z",
+      "load_kw": 0.456,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.456,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 6,
+      "timestamp": "2011-06-30T16:30:00Z",
+      "load_kw": 0.398,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.398,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 7,
+      "timestamp": "2011-06-30T17:00:00Z",
+      "load_kw": 0.388,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.388,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 8,
+      "timestamp": "2011-06-30T17:30:00Z",
+      "load_kw": 0.442,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.442,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 9,
+      "timestamp": "2011-06-30T18:00:00Z",
+      "load_kw": 0.398,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.398,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 10,
+      "timestamp": "2011-06-30T18:30:00Z",
+      "load_kw": 0.26,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.26,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 11,
+      "timestamp": "2011-06-30T19:00:00Z",
+      "load_kw": 0.358,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.358,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 12,
+      "timestamp": "2011-06-30T19:30:00Z",
+      "load_kw": 0.454,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.454,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 13,
+      "timestamp": "2011-06-30T20:00:00Z",
+      "load_kw": 0.368,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.368,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 14,
+      "timestamp": "2011-06-30T20:30:00Z",
+      "load_kw": 0.874,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 0.874,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 15,
+      "timestamp": "2011-06-30T21:00:00Z",
+      "load_kw": 1.038,
+      "pv_kw": 0.012,
+      "battery_kw": 0.0,
+      "soc_kwh": 4.0,
+      "grid_import_kw": 1.026,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 16,
+      "timestamp": "2011-06-30T21:30:00Z",
+      "load_kw": 2.05,
+      "pv_kw": 0.038,
+      "battery_kw": -0.495140350877193,
+      "soc_kwh": 3.7393998153277934,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 17,
+      "timestamp": "2011-06-30T22:00:00Z",
+      "load_kw": 1.476,
+      "pv_kw": 0.088,
+      "battery_kw": 0.0,
+      "soc_kwh": 3.7393998153277934,
+      "grid_import_kw": 1.388,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 18,
+      "timestamp": "2011-06-30T22:30:00Z",
+      "load_kw": 0.278,
+      "pv_kw": 0.188,
+      "battery_kw": 0.0,
+      "soc_kwh": 3.7393998153277934,
+      "grid_import_kw": 0.09000000000000002,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 19,
+      "timestamp": "2011-06-30T23:00:00Z",
+      "load_kw": 0.418,
+      "pv_kw": 0.212,
+      "battery_kw": 0.0,
+      "soc_kwh": 3.7393998153277934,
+      "grid_import_kw": 1.206,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 1.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 20,
+      "timestamp": "2011-06-30T23:30:00Z",
+      "load_kw": 0.336,
+      "pv_kw": 0.2,
+      "battery_kw": 0.0,
+      "soc_kwh": 3.7393998153277934,
+      "grid_import_kw": 1.1360000000000001,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 1.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 21,
+      "timestamp": "2011-07-01T00:00:00Z",
+      "load_kw": 0.236,
+      "pv_kw": 0.362,
+      "battery_kw": 0.126,
+      "soc_kwh": 3.7992498153277934,
+      "grid_import_kw": 0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 22,
+      "timestamp": "2011-07-01T00:30:00Z",
+      "load_kw": 0.452,
+      "pv_kw": 0.476,
+      "battery_kw": 0.0,
+      "soc_kwh": 3.7992498153277934,
+      "grid_import_kw": 0.976,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 1.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 23,
+      "timestamp": "2011-07-01T01:00:00Z",
+      "load_kw": 0.478,
+      "pv_kw": 0.3,
+      "battery_kw": -0.0,
+      "soc_kwh": 3.7992498153277934,
+      "grid_import_kw": 0.178,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 24,
+      "timestamp": "2011-07-01T01:30:00Z",
+      "load_kw": 0.534,
+      "pv_kw": 0.426,
+      "battery_kw": -0.0,
+      "soc_kwh": 3.7992498153277934,
+      "grid_import_kw": 1.108,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 1.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 25,
+      "timestamp": "2011-07-01T02:00:00Z",
+      "load_kw": 0.468,
+      "pv_kw": 0.226,
+      "battery_kw": -0.0,
+      "soc_kwh": 3.7992498153277934,
+      "grid_import_kw": 0.24200000000000002,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 26,
+      "timestamp": "2011-07-01T02:30:00Z",
+      "load_kw": 0.404,
+      "pv_kw": 0.176,
+      "battery_kw": 1.288859649122807,
+      "soc_kwh": 4.411458148661127,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 27,
+      "timestamp": "2011-07-01T03:00:00Z",
+      "load_kw": 0.516,
+      "pv_kw": 0.176,
+      "battery_kw": 1.176859649122807,
+      "soc_kwh": 4.9704664819944595,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 28,
+      "timestamp": "2011-07-01T03:30:00Z",
+      "load_kw": 0.442,
+      "pv_kw": 0.188,
+      "battery_kw": 1.0111758273800857,
+      "soc_kwh": 5.450775,
+      "grid_import_kw": 1.2651758273800857,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 29,
+      "timestamp": "2011-07-01T04:00:00Z",
+      "load_kw": 0.534,
+      "pv_kw": 0.176,
+      "battery_kw": 1.158859649122807,
+      "soc_kwh": 6.001233333333333,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 30,
+      "timestamp": "2011-07-01T04:30:00Z",
+      "load_kw": 0.456,
+      "pv_kw": 0.25,
+      "battery_kw": 1.310859649122807,
+      "soc_kwh": 6.623891666666667,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 31,
+      "timestamp": "2011-07-01T05:00:00Z",
+      "load_kw": 0.492,
+      "pv_kw": 0.188,
+      "battery_kw": 1.212859649122807,
+      "soc_kwh": 7.2,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 32,
+      "timestamp": "2011-07-01T05:30:00Z",
+      "load_kw": 2.29,
+      "pv_kw": 0.138,
+      "battery_kw": -0.6351403508771931,
+      "soc_kwh": 6.865715604801477,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 33,
+      "timestamp": "2011-07-01T06:00:00Z",
+      "load_kw": 2.446,
+      "pv_kw": 0.112,
+      "battery_kw": -2.0,
+      "soc_kwh": 5.813084025854109,
+      "grid_import_kw": 0.3340000000000001,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 34,
+      "timestamp": "2011-07-01T06:30:00Z",
+      "load_kw": 2.286,
+      "pv_kw": 0.012,
+      "battery_kw": -2.0,
+      "soc_kwh": 4.760452446906741,
+      "grid_import_kw": 0.274,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 35,
+      "timestamp": "2011-07-01T07:00:00Z",
+      "load_kw": 2.958,
+      "pv_kw": 0.0,
+      "battery_kw": -1.746859649122808,
+      "soc_kwh": 3.8410526315789473,
+      "grid_import_kw": 1.2111403508771923,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 36,
+      "timestamp": "2011-07-01T07:30:00Z",
+      "load_kw": 1.678,
+      "pv_kw": 0.0,
+      "battery_kw": -1.678,
+      "soc_kwh": 2.957894736842105,
+      "grid_import_kw": -0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 37,
+      "timestamp": "2011-07-01T08:00:00Z",
+      "load_kw": 1.054,
+      "pv_kw": 0.0,
+      "battery_kw": -1.054,
+      "soc_kwh": 2.403157894736842,
+      "grid_import_kw": -0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 38,
+      "timestamp": "2011-07-01T08:30:00Z",
+      "load_kw": 0.966,
+      "pv_kw": 0.0,
+      "battery_kw": -0.966,
+      "soc_kwh": 1.8947368421052633,
+      "grid_import_kw": -0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 39,
+      "timestamp": "2011-07-01T09:00:00Z",
+      "load_kw": 0.842,
+      "pv_kw": 0.0,
+      "battery_kw": -0.842,
+      "soc_kwh": 1.451578947368421,
+      "grid_import_kw": -0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 40,
+      "timestamp": "2011-07-01T09:30:00Z",
+      "load_kw": 0.858,
+      "pv_kw": 0.0,
+      "battery_kw": -0.8580000000000001,
+      "soc_kwh": 1.0,
+      "grid_import_kw": -0.0,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 41,
+      "timestamp": "2011-07-01T10:00:00Z",
+      "load_kw": 0.864,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 1.0,
+      "grid_import_kw": 0.864,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 42,
+      "timestamp": "2011-07-01T10:30:00Z",
+      "load_kw": 0.792,
+      "pv_kw": 0.0,
+      "battery_kw": 0.0,
+      "soc_kwh": 1.0,
+      "grid_import_kw": 0.792,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.55,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 43,
+      "timestamp": "2011-07-01T11:00:00Z",
+      "load_kw": 0.808,
+      "pv_kw": 0.0,
+      "battery_kw": 0.708859649122807,
+      "soc_kwh": 1.3367083333333334,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 44,
+      "timestamp": "2011-07-01T11:30:00Z",
+      "load_kw": 0.668,
+      "pv_kw": 0.0,
+      "battery_kw": 0.848859649122807,
+      "soc_kwh": 1.7399166666666668,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 45,
+      "timestamp": "2011-07-01T12:00:00Z",
+      "load_kw": 0.688,
+      "pv_kw": 0.0,
+      "battery_kw": 0.8288596491228071,
+      "soc_kwh": 2.133625,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 46,
+      "timestamp": "2011-07-01T12:30:00Z",
+      "load_kw": 0.72,
+      "pv_kw": 0.0,
+      "battery_kw": 0.796859649122807,
+      "soc_kwh": 2.5121333333333333,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 47,
+      "timestamp": "2011-07-01T13:00:00Z",
+      "load_kw": 0.478,
+      "pv_kw": 0.0,
+      "battery_kw": 1.038859649122807,
+      "soc_kwh": 3.0055916666666667,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    },
+    {
+      "step": 48,
+      "timestamp": "2011-07-01T13:30:00Z",
+      "load_kw": 0.476,
+      "pv_kw": 0.0,
+      "battery_kw": 1.040859649122807,
+      "soc_kwh": 3.5,
+      "grid_import_kw": 1.516859649122807,
+      "grid_export_kw": 0.0,
+      "pv_curtail_kw": 0.0,
+      "flex_kw": 0.0,
+      "tariff_aud_per_kwh": 0.22,
+      "source_kind": "DERIVED",
+      "electrical_validation": "NOT_VALIDATED"
+    }
+  ],
+  "metrics": {
+    "energy": 4.778202235748651,
+    "peak": 1.516859649122807,
+    "battery": 12.411886159304078,
+    "curtail": 0.0
+  },
+  "objective": {
+    "raw": {
+      "energy": 4.778202235748651,
+      "peak": 1.516859649122807,
+      "battery": 12.411886159304078,
+      "curtail": 0.0
+    },
+    "weighted_contributions": {
+      "energy": 4.778202235748651,
+      "peak": 0.6825868421052632,
+      "battery": 0.620594307965204,
+      "curtail": 0.0
+    },
+    "total": 6.081383385819119
+  },
+  "status": "ENERGY_MODEL_OPTIMIZED",
+  "electrical_verification": "NOT_VALIDATED",
+  "solver": "scipy.optimize.milp",
+  "optimality_gap_limit": 0.01,
+  "warnings": [
+    "La batería y la carga flexible son escenarios modelados; QSTS remoto aún no aplica estas consignas."
+  ],
+  "comparison": {
+    "baseline": {
+      "status": "ENERGY_MODEL_BASELINE",
+      "metrics": {
+        "energy": 6.600520000000001,
+        "peak": 2.958,
+        "battery": 0.0,
+        "curtail": 0.0
+      },
+      "objective": {
+        "raw": {
+          "energy": 6.600520000000001,
+          "peak": 2.958,
+          "battery": 0.0,
+          "curtail": 0.0
+        },
+        "weighted_contributions": {
+          "energy": 6.600520000000001,
+          "peak": 1.3311000000000002,
+          "battery": 0.0,
+          "curtail": 0.0
+        },
+        "total": 7.9316200000000014
+      },
+      "rows": [
+        {
+          "step": 1,
+          "grid_import_kw": 0.392,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 2,
+          "grid_import_kw": 0.578,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 3,
+          "grid_import_kw": 0.568,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 4,
+          "grid_import_kw": 0.482,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 5,
+          "grid_import_kw": 0.456,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 6,
+          "grid_import_kw": 0.398,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 7,
+          "grid_import_kw": 0.388,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 8,
+          "grid_import_kw": 0.442,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 9,
+          "grid_import_kw": 0.398,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 10,
+          "grid_import_kw": 0.26,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 11,
+          "grid_import_kw": 0.358,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 12,
+          "grid_import_kw": 0.454,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 13,
+          "grid_import_kw": 0.368,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 14,
+          "grid_import_kw": 0.874,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 15,
+          "grid_import_kw": 1.026,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 16,
+          "grid_import_kw": 2.012,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 17,
+          "grid_import_kw": 2.388,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 18,
+          "grid_import_kw": 1.09,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 19,
+          "grid_import_kw": 1.206,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 20,
+          "grid_import_kw": 1.1360000000000001,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 21,
+          "grid_import_kw": 0,
+          "grid_export_kw": 0.126
+        },
+        {
+          "step": 22,
+          "grid_import_kw": 0,
+          "grid_export_kw": 0.023999999999999966
+        },
+        {
+          "step": 23,
+          "grid_import_kw": 0.178,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 24,
+          "grid_import_kw": 0.10800000000000004,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 25,
+          "grid_import_kw": 0.24200000000000002,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 26,
+          "grid_import_kw": 0.22800000000000004,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 27,
+          "grid_import_kw": 0.34,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 28,
+          "grid_import_kw": 0.254,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 29,
+          "grid_import_kw": 0.35800000000000004,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 30,
+          "grid_import_kw": 0.20600000000000002,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 31,
+          "grid_import_kw": 0.304,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 32,
+          "grid_import_kw": 2.152,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 33,
+          "grid_import_kw": 2.334,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 34,
+          "grid_import_kw": 2.274,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 35,
+          "grid_import_kw": 2.958,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 36,
+          "grid_import_kw": 1.678,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 37,
+          "grid_import_kw": 1.054,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 38,
+          "grid_import_kw": 0.966,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 39,
+          "grid_import_kw": 0.842,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 40,
+          "grid_import_kw": 0.858,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 41,
+          "grid_import_kw": 0.864,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 42,
+          "grid_import_kw": 0.792,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 43,
+          "grid_import_kw": 0.808,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 44,
+          "grid_import_kw": 0.668,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 45,
+          "grid_import_kw": 0.688,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 46,
+          "grid_import_kw": 0.72,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 47,
+          "grid_import_kw": 0.478,
+          "grid_export_kw": 0
+        },
+        {
+          "step": 48,
+          "grid_import_kw": 0.476,
+          "grid_export_kw": 0
+        }
+      ],
+      "electrical_verification": "NOT_VALIDATED"
+    },
+    "optimized": {
+      "status": "ENERGY_MODEL_OPTIMIZED",
+      "metrics": {
+        "energy": 4.778202235748651,
+        "peak": 1.516859649122807,
+        "battery": 12.411886159304078,
+        "curtail": 0.0
+      },
+      "objective": {
+        "raw": {
+          "energy": 4.778202235748651,
+          "peak": 1.516859649122807,
+          "battery": 12.411886159304078,
+          "curtail": 0.0
+        },
+        "weighted_contributions": {
+          "energy": 4.778202235748651,
+          "peak": 0.6825868421052632,
+          "battery": 0.620594307965204,
+          "curtail": 0.0
+        },
+        "total": 6.081383385819119
+      },
+      "electrical_verification": "NOT_VALIDATED"
+    },
+    "causal_warning": "La diferencia de costo es del optimizador, NO del TKG."
+  }
+}

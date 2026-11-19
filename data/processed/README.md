@@ -1,0 +1,1 @@
+Contrato CSV: `timestamp` UTC ISO 8601, `load_kw`, `pv_kw` (potencia media), 48 intervalos consecutivos de 30 min. No aceptar fechas naïve. Los archivos procesados se etiquetan DERIVED y se enlazan al origen REAL.

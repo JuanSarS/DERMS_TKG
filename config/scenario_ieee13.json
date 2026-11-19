@@ -1,0 +1,40 @@
+{
+  "model": "ieee13",
+  "step_minutes": 30,
+  "time_steps": 48,
+  "source": "ausgrid_secondary_customer12",
+  "profile_scale_kw": 1.0,
+  "load_scaling_rule": "mean_normalized",
+  "reference_feeder_bus": "671",
+  "assignment_kind": "MODELED_NOT_PHYSICAL",
+  "battery": {
+    "capacity_kwh": 8.0,
+    "initial_soc_kwh": 4.0,
+    "min_soc_kwh": 1.0,
+    "max_soc_kwh": 7.2,
+    "max_charge_kw": 2.0,
+    "max_discharge_kw": 2.0,
+    "eta_charge": 0.95,
+    "eta_discharge": 0.95,
+    "terminal_min_kwh": 3.5
+  },
+  "flexible_load": {
+    "power_kw": 1.0,
+    "slots_required": 4,
+    "earliest_slot": 16,
+    "latest_slot": 40
+  },
+  "tariff": {
+    "buy_offpeak_aud_per_kwh": 0.22,
+    "buy_peak_aud_per_kwh": 0.55,
+    "sell_aud_per_kwh": 0.04,
+    "peak_start_slot": 32,
+    "peak_end_slot": 42
+  },
+  "limits": {
+    "grid_import_kw": 6.0,
+    "grid_export_kw": 4.0,
+    "voltage_min_pu": 0.95,
+    "voltage_max_pu": 1.05
+  }
+}

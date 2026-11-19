@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "terms": {
+    "energy": {
+      "enabled": true,
+      "weight": 1.0,
+      "scale": 1.0,
+      "unit": "AUD"
+    },
+    "peak": {
+      "enabled": true,
+      "weight": 0.45,
+      "scale": 1.0,
+      "unit": "kW"
+    },
+    "battery": {
+      "enabled": true,
+      "weight": 0.05,
+      "scale": 1.0,
+      "unit": "kWh throughput"
+    },
+    "curtail": {
+      "enabled": true,
+      "weight": 0.08,
+      "scale": 1.0,
+      "unit": "kWh"
+    }
+  },
+  "description": "Se normaliza cada termino mediante scale antes de sumar. Los pesos son adimensionales."
+}

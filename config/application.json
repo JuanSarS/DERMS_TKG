@@ -1,0 +1,9 @@
+{
+  "health_interval_seconds": 15,
+  "http_timeout_seconds": 25,
+  "max_ws_idle_seconds": 80,
+  "reconnect_attempts": 3,
+  "demo_mode_explicit": true,
+  "bind_host": "127.0.0.1",
+  "retention_days": 30
+}

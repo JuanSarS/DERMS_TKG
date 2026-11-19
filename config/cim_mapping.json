@@ -1,0 +1,9 @@
+{
+  "cim_namespace": "http://iec.ch/TC57/CIM100#",
+  "mapping": {
+    "Bus": "ConnectivityNode",
+    "Line": "ACLineSegment",
+    "Load": "EnergyConsumer"
+  },
+  "note": "Solo recursos recuperados de CIM/XML se etiquetan como CIM verificado. Asignaciones de bater\u00edas y perfiles son hipot\u00e9ticas."
+}

@@ -1,0 +1,13 @@
+{
+  "ausgrid_secondary_customer12": {
+    "kind": "REAL",
+    "source_url": "https://github.com/pierre-haessig/solarhome-control-bench",
+    "transformation_kind": "DERIVED",
+    "caution": "Extracto secundario: la asignacion a IEEE13 es modelada."
+  },
+  "ieee13_cim": {
+    "kind": "REFERENCE",
+    "source": "Archivo CIM100 aportado por el usuario",
+    "version": "IEC61970CIM100 2019-04-01"
+  }
+}

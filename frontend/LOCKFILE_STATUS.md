@@ -1,0 +1,3 @@
+# Lockfile pendiente de generación en la máquina de instalación
+
+No se incluye un `package-lock.json` ficticio: el registro npm devolvió `EAI_AGAIN` en el entorno de creación. El `scripts/setup.ps1` ejecuta `npm install` y genera automáticamente el **package-lock.json completo y resuelto** en Windows con acceso al registro npm. Posteriormente ejecute `npm ci` para instalaciones reproducibles y conserve el lock generado. Los paquetes directos están fijados por rangos en `package.json`; el frontend se comprobó sintácticamente y con pruebas Node, pero su build Vite/Biome permanece `NOT_RUN` hasta acceso al registro.
