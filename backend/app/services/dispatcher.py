@@ -30,11 +30,18 @@ def tariff(scenario: dict, index: int) -> float:
     )
 
 
-def optimize(profile: dict, scenario: dict, objective: dict) -> dict:
+def optimize(
+    profile: dict,
+    scenario: dict,
+    objective: dict,
+    operational_context: list[dict] | None = None,
+) -> dict:
     data = profile["records"]
     count = len(data)
     if not data or count != scenario["time_steps"]:
         raise ValueError("La cantidad de muestras no coincide con el escenario")
+    if operational_context is not None and len(operational_context) != count:
+        raise ValueError("Contexto TKG no coincide con el número de intervalos")
     dt = scenario["step_minutes"] / 60.0
     b, f, limits = scenario["battery"], scenario["flexible_load"], scenario["limits"]
     names = len(VARIABLES)
@@ -55,8 +62,16 @@ def optimize(profile: dict, scenario: dict, objective: dict) -> dict:
 
     for t, sample in enumerate(data):
         v = {key: at(t, key) for key in VARIABLES}
-        upper[v["charge"]] = b["max_charge_kw"]
-        upper[v["discharge"]] = b["max_discharge_kw"]
+        context = (
+            operational_context[t]
+            if operational_context is not None
+            else {"availability": "AVAILABLE"}
+        )
+        if context.get("availability") not in ("AVAILABLE", "UNAVAILABLE"):
+            raise ValueError("TKG entregó disponibilidad no válida")
+        available = context["availability"] == "AVAILABLE"
+        upper[v["charge"]] = b["max_charge_kw"] if available else 0.0
+        upper[v["discharge"]] = b["max_discharge_kw"] if available else 0.0
         upper[v["import"]] = limits["grid_import_kw"]
         upper[v["export"]] = limits["grid_export_kw"]
         upper[v["curtail"]] = float(sample["pv_kw"])
@@ -154,6 +169,7 @@ def optimize(profile: dict, scenario: dict, objective: dict) -> dict:
                 "tariff_aud_per_kwh": tariff(scenario, t),
                 "source_kind": "DERIVED",
                 "electrical_validation": "NOT_VALIDATED",
+                "operational_context": operational_context[t] if operational_context else None,
             }
         )
     errors = validate_dispatch(rows, scenario)

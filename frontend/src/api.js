@@ -22,6 +22,7 @@ export const api = {
   run: (id) => request(`/runs/${encodeURIComponent(id)}`),
   createRun: (body) => request("/runs", "POST", body),
   snapshot: (body) => request("/snapshots", "POST", body),
+  coupled: (body) => request("/coupled-runs", "POST", body),
   offline: () => request("/experiments/offline", "POST"),
   dispatch: (id) => request(`/runs/${encodeURIComponent(id)}/dispatch`, "POST"),
   objective: () => request("/objective"),

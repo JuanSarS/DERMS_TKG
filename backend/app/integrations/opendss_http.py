@@ -55,7 +55,7 @@ class RemoteOpenDSS:
             if response.status_code == 401:
                 self.auth.expire()
                 raise UpstreamError("AUTH_ERROR", "Token caducado o usuario no autorizado")
-            if response.status_code in (403, 404, 409, 422, 429):
+            if response.status_code in (400, 403, 404, 409, 422, 429):
                 raise UpstreamError(
                     f"HTTP_{response.status_code}",
                     f"OpenDSS rechazó la solicitud: {response.status_code}",

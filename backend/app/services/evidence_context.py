@@ -28,7 +28,9 @@ def build_context(run: dict, step: int | None = None, store=None) -> dict:
     base = _safe_run_path(run["run_id"])
     selected = packet.get("step")
     rdf_file = base / (
-        "derms_graph.ttl"
+        "coupled_graph.ttl"
+        if (base / "coupled_graph.ttl").exists()
+        else "derms_graph.ttl"
         if (base / "derms_graph.ttl").exists()
         else "qsts_graph.ttl"
         if (base / "qsts_graph.ttl").exists()
@@ -45,12 +47,32 @@ def build_context(run: dict, step: int | None = None, store=None) -> dict:
             "snapshot_results": len(set(graph.subjects(RDF.type, TKG.SnapshotResult))),
             "asof": [],
         }
-        if selected and selected.get("timestamp") and rdf_file.name == "derms_graph.ttl":
+        if (
+            selected
+            and selected.get("timestamp")
+            and rdf_file.name in {"derms_graph.ttl", "coupled_graph.ttl"}
+        ):
             try:
                 at = datetime.fromisoformat(selected["timestamp"].replace("Z", "+00:00"))
                 packet["tkg"]["asof"] = query_asof(run["run_id"], at)[:8]
             except (ValueError, OSError):
                 packet["tkg"]["query_error"] = "No se logró consultar este instante."
+        if rdf_file.name == "coupled_graph.ttl":
+            from backend.app.services.tkg_builder import RESOURCE
+
+            selected_step = selected.get("step") if selected else None
+            if selected_step:
+                decision = RESOURCE[f"assertion/{run['run_id']}/{selected_step}"]
+                packet["tkg"]["used_knowledge_uris"] = [
+                    str(node) for node in graph.objects(decision, TKG.usedKnowledge)
+                ]
+                packet["tkg"]["checked_by_uris"] = [
+                    str(node) for node in graph.objects(decision, TKG.checkedBy)
+                ]
+            packet["tkg"]["evaluation_status"] = list(
+                str(node)
+                for node in graph.objects(RESOURCE[f"run/{run['run_id']}"], TKG.electricalStatus)
+            )[:1]
         if rdf_file.name == "qsts_graph.ttl":
             packet["tkg"]["step_links"] = [
                 str(node) for node in list(graph.objects(None, TKG.hasSimulationStep))[:4]
@@ -81,9 +103,21 @@ def build_context(run: dict, step: int | None = None, store=None) -> dict:
             }
             for row in store.list_runs(limit=5)
         ]
+    coupled = run.get("result") or {}
+    if run.get("status") == "COUPLED_COMPLETED" and "electrical" in coupled:
+        packet["coupled_validation"] = {
+            "status": coupled.get("status"),
+            "baseline_run_id": coupled.get("baseline_run_id"),
+            "optimized_run_id": coupled.get("optimized_run_id"),
+            "scope": coupled.get("validation_scope"),
+            "voltage_check": coupled["electrical"].get("optimized_check"),
+            "power_difference_kw": coupled["electrical"].get("max_abs_delta_kw"),
+            "individual_storage_telemetry": coupled.get("device_telemetry_verified", False),
+        }
     packet["knowledge_limits"] = [
-        "No hay control BESS en la API QSTS original; su simulación global no verifica despachos.",
-        "El TKG actual registra estados y permite consultarlos; el MILP no incorpora aún restricciones RDF.",
-        "Las fuentes Ausgrid son mediciones históricas; la batería, cargas flexibles y tarifas son modeladas.",
+        "Las fuentes Ausgrid son históricas; la batería, cargas flexibles y tarifas son modeladas.",
+        "El TKG operativo aporta estados de disponibilidad consultados antes del MILP.",
+        "La evaluación custom QSTS solo mide red agregada; no confirma SOC ni terminal Storage por paso.",
+        "No atribuir ahorro energético al TKG sin comparación controlada B0/B2.",
     ]
     return packet

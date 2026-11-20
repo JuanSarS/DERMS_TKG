@@ -1,6 +1,7 @@
 /** Pantalla principal: configuración, QSTS remoto, curvas y acciones calculadas. */
 import { api } from "../api.js";
 import { clearSeries, drawSeries } from "../components/charts.js";
+import { mountCoupledControl } from "../components/coupled_control.js";
 import { dispatchTable } from "../components/dispatch_table.js";
 import { evidence } from "../components/evidence.js";
 import { feederDiagram } from "../components/feeder.js";
@@ -25,6 +26,7 @@ export async function dermsPage(root) {
       <section class="card"><h3>Parámetros de la función objetivo</h3>
         <p class="muted small">Cada peso se aplica a su término normalizado. Guardar no modifica corridas anteriores.</p>
         <div id="objectiveControls" class="objective-grid"></div><button id="saveObjective">Guardar nueva función</button></section>
+      <section class="card" id="coupledControl"></section>
       ${feederDiagram()}
       <section class="card"><h3>Curvas de simulación y energía</h3>
         <p class="muted small">Curvas QSTS remoto y despacho local están etiquetadas por separado.</p>
@@ -70,7 +72,7 @@ export async function dermsPage(root) {
     const snapshot = run.result?.simulation_type === "snapshot" ? run.result.result : null;
     root.querySelector("#currentSummary").outerHTML =
       `<section class="card" id="currentSummary">${evidence(run).replace('<section class="card">', "").replace("</section>", "")}
-      <p class="muted small">${escapeHtml(run?.scenario?.derived_from_run_id ? "Despacho derivado: verificación BESS NO VALIDADA." : "Simulación eléctrica basada en multiplicador global de carga.")}</p>
+      <p class="muted small">${escapeHtml(run?.status === "COUPLED_COMPLETED" ? "Modelo IEEE13 personalizado con Storage/FV en QSTS; detalle en panel de resultados. Telemetría BESS no expuesta." : run?.scenario?.derived_from_run_id ? "Despacho derivado: verificación BESS NO VALIDADA." : "Simulación eléctrica basada en multiplicador global de carga.")}</p>
       ${snapshot ? `<p class="muted small">Snapshot: converged=${escapeHtml(snapshot.converged)}, P=${escapeHtml(snapshot.total_power_kw)} kW, Q=${escapeHtml(snapshot.total_power_kvar)} kvar. BESS NOT_VALIDATED.</p>` : ""}</section>`;
     dispatchButton.disabled = !["VERIFIED", "ENERGY_MODEL_ONLY"].includes(run.status);
     root.querySelector("#dispatchTable").innerHTML = dispatchTable(dispatch?.rows);
@@ -182,6 +184,7 @@ export async function dermsPage(root) {
       message.textContent = error.message;
     }
   };
+  mountCoupledControl(root, showRun);
   if (appState.currentRun?.run_id) await refresh(appState.currentRun.run_id);
   else if (appState.status?.last_good_run?.run_id)
     await refresh(appState.status.last_good_run.run_id);

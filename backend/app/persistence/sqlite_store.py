@@ -112,6 +112,20 @@ class Store:
             db.execute("INSERT OR REPLACE INTO meta VALUES ('last_good_run',?)", (run_id,))
             db.execute("INSERT OR REPLACE INTO meta VALUES ('active_run',?)", (run_id,))
 
+    def save_coupled_result(self, run_id: str, report: dict) -> None:
+        """Confirma el ciclo conjunto; el resultado reporta explícitamente violaciones."""
+        with self.connect() as db:
+            row = db.execute("SELECT status FROM runs WHERE run_id=?", (run_id,)).fetchone()
+            if row is None or row["status"] == "ERROR":
+                raise ValueError("Corrida conjunta no confirmable")
+            db.execute(
+                "UPDATE runs SET status='COUPLED_COMPLETED', updated_at=?, "
+                "remote_verification='custom_dss_aggregated_qsts', result_json=? WHERE run_id=?",
+                (utc_now(), json.dumps(report), run_id),
+            )
+            db.execute("INSERT OR REPLACE INTO meta VALUES ('last_good_run',?)", (run_id,))
+            db.execute("INSERT OR REPLACE INTO meta VALUES ('active_run',?)", (run_id,))
+
     def save_dispatch(self, run_id: str, dispatch: dict) -> None:
         with self.connect() as db:
             db.execute(

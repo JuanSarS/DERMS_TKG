@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from backend.app.api import (
+    coupled,
     experiments,
     graph,
     llm,
@@ -79,7 +80,17 @@ async def remote_error_handler(_request: Request, exc: UpstreamError):
     return JSONResponse({"code": exc.code, "detail": str(exc)}, status_code=code)
 
 
-for module in (status, sessions, simulations, snapshots, objectives, graph, experiments, llm):
+for module in (
+    status,
+    sessions,
+    simulations,
+    snapshots,
+    coupled,
+    objectives,
+    graph,
+    experiments,
+    llm,
+):
     app.include_router(module.router, prefix="/api", tags=[module.__name__.rsplit(".", 1)[-1]])
 app.websocket("/api/live/{run_id}")(local_ws)
 

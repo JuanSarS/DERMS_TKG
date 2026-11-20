@@ -33,8 +33,11 @@ def evidence_packet(run: dict, step: int | None = None) -> dict:
         else None,
         "objective": dispatch.get("objective"),
         "metrics": dispatch.get("metrics"),
-        "caveat": "QSTS y snapshot remotos validan solo multiplicadores globales; "
-        "no comprueban consignas de BESS/PV por barra.",
+        "caveat": (
+            "El QSTS remoto normal aplica solo multiplicadores globales. "
+            "En una corrida acoplada se evalúa un modelo DSS con Storage/PV "
+            "pero falta telemetría individual y sincronización de consignas verificada."
+        ),
     }
 
 
@@ -44,7 +47,7 @@ def deterministic_explanation(evidence: dict) -> str:
         return (
             f"En {step['timestamp']}, consigna BESS={step['battery_kw']:.3f} kW "
             f"(positivo=carga), SOC={step['soc_kwh']:.3f} kWh. "
-            "Decisión optimizada localmente. NOT_VALIDATED eléctricamente para BESS. "
+            "Decisión calculada por MILP. La validación requiere revisar coupled_validation. "
             f"Aserciones RDF consultadas: {len(evidence.get('tkg', {}).get('asof', []))}."
         )
     qsts = evidence.get("qsts_step")
