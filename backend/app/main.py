@@ -9,7 +9,16 @@ from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from backend.app.api import experiments, graph, llm, objectives, sessions, simulations, status
+from backend.app.api import (
+    experiments,
+    graph,
+    llm,
+    objectives,
+    sessions,
+    simulations,
+    snapshots,
+    status,
+)
 from backend.app.api_ws import local_ws
 from backend.app.integrations.opendss_http import RemoteOpenDSS, UpstreamError
 from backend.app.logging_config import configure_logging
@@ -17,6 +26,7 @@ from backend.app.persistence.sqlite_store import Store
 from backend.app.services.health_monitor import HealthMonitor
 from backend.app.services.orchestrator import Orchestrator
 from backend.app.services.run_manager import RunManager
+from backend.app.services.snapshot_runner import SnapshotRunner
 from backend.app.settings import ROOT, settings
 
 configure_logging()
@@ -31,12 +41,14 @@ async def lifespan(app: FastAPI):
     monitor = HealthMonitor(remote)
     manager = RunManager(store)
     orchestrator = Orchestrator(remote, monitor, manager)
+    snapshot_runner = SnapshotRunner(remote, monitor, manager)
     app.state.services = SimpleNamespace(
         store=store,
         remote=remote,
         monitor=monitor,
         manager=manager,
         orchestrator=orchestrator,
+        snapshot_runner=snapshot_runner,
         created_sessions=set(),
         llm_enabled=bool(settings.ollama().get("enabled", False)),
     )
@@ -67,7 +79,7 @@ async def remote_error_handler(_request: Request, exc: UpstreamError):
     return JSONResponse({"code": exc.code, "detail": str(exc)}, status_code=code)
 
 
-for module in (status, sessions, simulations, objectives, graph, experiments, llm):
+for module in (status, sessions, simulations, snapshots, objectives, graph, experiments, llm):
     app.include_router(module.router, prefix="/api", tags=[module.__name__.rsplit(".", 1)[-1]])
 app.websocket("/api/live/{run_id}")(local_ws)
 

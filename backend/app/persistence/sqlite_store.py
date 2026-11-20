@@ -97,6 +97,21 @@ class Store:
             db.execute("INSERT OR REPLACE INTO meta VALUES ('last_good_run',?)", (run_id,))
             db.execute("INSERT OR REPLACE INTO meta VALUES ('active_run',?)", (run_id,))
 
+    def commit_snapshot(self, run_id: str, result: dict) -> None:
+        """Confirma resultado eléctrico snapshot solo tras validar REST/convergencia."""
+        with self.connect() as db:
+            current = db.execute("SELECT status FROM runs WHERE run_id=?", (run_id,)).fetchone()
+            if not current or current["status"] == "ERROR":
+                raise ValueError("La corrida snapshot no puede confirmarse")
+            db.execute(
+                "UPDATE runs SET status='SNAPSHOT_VERIFIED', "
+                "remote_verification='remote_snapshot_reference_verified', "
+                "updated_at=?,result_json=? WHERE run_id=?",
+                (utc_now(), json.dumps(result), run_id),
+            )
+            db.execute("INSERT OR REPLACE INTO meta VALUES ('last_good_run',?)", (run_id,))
+            db.execute("INSERT OR REPLACE INTO meta VALUES ('active_run',?)", (run_id,))
+
     def save_dispatch(self, run_id: str, dispatch: dict) -> None:
         with self.connect() as db:
             db.execute(

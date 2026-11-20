@@ -34,3 +34,10 @@ export function drawSeries(canvas, rows, title, fields, options = {}) {
   });
   instances.set(canvas.id, chart);
 }
+
+export function clearSeries(canvas) {
+  if (!canvas) return;
+  const old = instances.get(canvas.id);
+  if (old) old.destroy();
+  instances.delete(canvas.id);
+}

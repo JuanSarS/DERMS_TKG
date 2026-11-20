@@ -118,3 +118,36 @@ def build_qsts_graph(run: dict, result: dict) -> Path:
         graph.add((uri, TKG.hasSimulationStep, node))
     path = ROOT / "results/runs" / run["run_id"] / "qsts_graph.ttl"
     return save_turtle(graph, path)
+
+
+def build_snapshot_graph(run: dict, data: dict) -> Path:
+    """Evidencia RDF de snapshot eléctrico agregado, no de consignas BESS individuales."""
+    graph = Graph()
+    graph += load_cim()
+    graph.bind("cim", CIM)
+    graph.bind("tkg", TKG)
+    graph.bind("res", RESOURCE)
+    run_uri = RESOURCE["run/" + run["run_id"]]
+    node = RESOURCE["snapshot/" + run["run_id"]]
+    result = data["result"]
+    graph.add((run_uri, RDF.type, TKG.SimulationRun))
+    graph.add((run_uri, TKG.sourceKind, Literal("SIMULATED")))
+    graph.add(
+        (run_uri, TKG.remoteElectricalValidation, Literal("remote_snapshot_reference_verified"))
+    )
+    graph.add((run_uri, TKG.upstreamSessionId, Literal(data["session_id"])))
+    graph.add((run_uri, TKG.hasSnapshot, node))
+    graph.add((node, RDF.type, TKG.SnapshotResult))
+    graph.add((node, TKG.forRun, run_uri))
+    graph.add((node, TKG.recordedAt, Literal(utc_now(), datatype=XSD.dateTime)))
+    graph.add(
+        (node, TKG.loadMultiplier, Literal(float(result["load_multiplier"]), datatype=XSD.double))
+    )
+    graph.add((node, TKG.totalKw, Literal(float(result["total_power_kw"]), datatype=XSD.double)))
+    graph.add(
+        (node, TKG.totalKvar, Literal(float(result["total_power_kvar"]), datatype=XSD.double))
+    )
+    graph.add((node, TKG.converged, Literal(bool(result["converged"]), datatype=XSD.boolean)))
+    graph.add((node, TKG.scope, Literal("REFERENCE_FEEDER_GLOBAL_LOAD_ONLY")))
+    path = ROOT / "results/runs" / run["run_id"] / "snapshot_graph.ttl"
+    return save_turtle(graph, path)

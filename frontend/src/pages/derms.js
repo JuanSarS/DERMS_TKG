@@ -1,11 +1,12 @@
 /** Pantalla principal: configuración, QSTS remoto, curvas y acciones calculadas. */
 import { api } from "../api.js";
-import { drawSeries } from "../components/charts.js";
+import { clearSeries, drawSeries } from "../components/charts.js";
 import { dispatchTable } from "../components/dispatch_table.js";
 import { evidence } from "../components/evidence.js";
 import { feederDiagram } from "../components/feeder.js";
 import { llmPanel } from "../components/llm_panel.js";
 import { scenarioForm } from "../components/scenario_form.js";
+import { mountSnapshotControl } from "../components/snapshot_control.js";
 import { timeSlider } from "../components/timeline.js";
 import { connectLive } from "../live.js";
 import { appState, escapeHtml, update } from "../state.js";
@@ -34,6 +35,7 @@ export async function dermsPage(root) {
     </div><aside class="side-workspace"><div id="currentSummary" class="card"><h3>Corrida</h3><p class="muted">Seleccione o ejecute un escenario.</p></div>
       <section class="card" id="llmCard"><h3>Asistente contextual</h3><p class="muted">Seleccione una corrida.</p></section>
     </aside></div>`;
+  mountSnapshotControl(root);
   const message = root.querySelector("#runMessage");
   const remoteButton = root.querySelector("#runRemote");
   const dispatchButton = root.querySelector("#runDispatch");
@@ -65,9 +67,11 @@ export async function dermsPage(root) {
     const dispatch = run.dispatch;
     const series = dispatch?.rows ?? run.steps ?? [];
     const remote = run.steps ?? [];
+    const snapshot = run.result?.simulation_type === "snapshot" ? run.result.result : null;
     root.querySelector("#currentSummary").outerHTML =
       `<section class="card" id="currentSummary">${evidence(run).replace('<section class="card">', "").replace("</section>", "")}
-      <p class="muted small">${escapeHtml(run?.scenario?.derived_from_run_id ? "Despacho derivado: verificación BESS NO VALIDADA." : "Simulación eléctrica basada en multiplicador global de carga.")}</p></section>`;
+      <p class="muted small">${escapeHtml(run?.scenario?.derived_from_run_id ? "Despacho derivado: verificación BESS NO VALIDADA." : "Simulación eléctrica basada en multiplicador global de carga.")}</p>
+      ${snapshot ? `<p class="muted small">Snapshot: converged=${escapeHtml(snapshot.converged)}, P=${escapeHtml(snapshot.total_power_kw)} kW, Q=${escapeHtml(snapshot.total_power_kvar)} kvar. BESS NOT_VALIDATED.</p>` : ""}</section>`;
     dispatchButton.disabled = !["VERIFIED", "ENERGY_MODEL_ONLY"].includes(run.status);
     root.querySelector("#dispatchTable").innerHTML = dispatchTable(dispatch?.rows);
     if (remote.length)
@@ -92,6 +96,8 @@ export async function dermsPage(root) {
           { key: "grid_import_kw", label: "Importación kW" },
         ],
       );
+    if (!remote.length && !dispatch?.rows) clearSeries(root.querySelector("#powerChart"));
+    if (!dispatch?.rows) clearSeries(root.querySelector("#batteryChart"));
     if (dispatch?.rows)
       drawSeries(
         root.querySelector("#batteryChart"),
