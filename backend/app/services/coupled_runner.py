@@ -12,6 +12,7 @@ from pathlib import Path
 
 from backend.app.integrations.opendss_http import UpstreamError
 from backend.app.persistence.file_store import export_run
+from backend.app.services.builtin_proxy import fixed_policy_rows, proxy_multipliers
 from backend.app.services.comparisons import compare_dispatch
 from backend.app.services.custom_dss import build_dispatch_zip
 from backend.app.services.dispatcher import optimize
@@ -20,6 +21,7 @@ from backend.app.services.operational_tkg import (
     resolve_constraints,
     save_operational_graph,
 )
+from backend.app.services.profile_mapper import to_multipliers
 from backend.app.services.tkg_builder import build_graph
 from backend.app.settings import ROOT
 
@@ -115,7 +117,11 @@ class CoupledRunner:
             params={"master": "master.dss"},
         )
         if not isinstance(checked, dict) or checked.get("valid") is not True:
-            raise UpstreamError("CUSTOM_MODEL_INVALID", "El worker no validó master.dss")
+            raise UpstreamError(
+                "CUSTOM_MODEL_INVALID",
+                "El worker rechazó master.dss: "
+                + str(checked.get("message") or checked.get("detail") or checked)[:500],
+            )
         return f"custom:{model_id}:master.dss"
 
     async def _remote_qsts(
@@ -137,6 +143,140 @@ class CoupledRunner:
             )
         return {"run_id": child_id, "result": child["result"], "topology": topology}
 
+    async def _builtin_qsts(
+        self,
+        job_id: str,
+        profile: dict,
+        scenario: dict,
+        objective: dict,
+        label: str,
+        multipliers: list[float],
+    ) -> dict:
+        """Use existing builtin IEEE13 only, with the upstream QSTS REST/WSS flow."""
+        await self.monitor.require_healthy()
+        remote_scenario = {
+            **scenario,
+            "topology": "ieee13",
+            "qsts_load_multipliers": multipliers,
+            "derived_from_run_id": job_id,
+            "model_label": label,
+            "validation_scope": "BUILTIN_IEEE13_GLOBAL_LOAD_ONLY",
+        }
+        child_id = self.manager.store.create(remote_scenario, objective, origin_kind="SIMULATED")
+        await self.orchestrator.execute(child_id, remote_scenario, profile)
+        child = self.manager.store.get_run(child_id)
+        if not child or child["status"] != "VERIFIED" or not child.get("result"):
+            raise UpstreamError(
+                "BUILTIN_QSTS_FAILED",
+                f"Falló QSTS IEEE13 de {label}. Corrida: {child_id}",
+            )
+        return {"run_id": child_id, "result": child["result"], "topology": "ieee13"}
+
+    async def _execute_builtin_proxy(
+        self,
+        job_id: str,
+        profile: dict,
+        scenario: dict,
+        objective: dict,
+        resource_scale: float,
+        events: list[dict] | None,
+    ) -> None:
+        """Execute baseline, optimized MILP and repeat QSTS as a *load proxy*.
+
+        No custom upload, device-level BESS assertion or fictitious physical check.
+        """
+        store = self.manager.store
+        run_dir = ROOT / "results/runs" / job_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+        await self.monitor.require_healthy()
+        context, operational_graph = resolve_constraints(
+            profile, scenario, load_events() if events is None else events
+        )
+        graph_manifest = save_operational_graph(operational_graph, run_dir)
+        store.event(job_id, "OPERATIONAL_TKG_USED", graph_manifest)
+        store.update(job_id, "PROXY_REFERENCE_QSTS")
+        source_multipliers = to_multipliers(
+            profile, scale_multiplier=float(scenario.get("scale_multiplier", 1))
+        )
+        reference = await self._builtin_qsts(
+            job_id, profile, scenario, objective, "ieee13_reference", source_multipliers
+        )
+        store.update(job_id, "PROXY_OPTIMIZING")
+        solution = optimize(profile, scenario, objective, context)
+        solution["comparison"] = compare_dispatch(profile, scenario, objective, solution)
+        store.save_dispatch(job_id, solution)
+        build_graph(store.get_run(job_id), profile, solution)
+        baseline_vector, baseline_mapping = proxy_multipliers(
+            profile,
+            scenario,
+            reference["result"],
+            fixed_policy_rows(profile, scenario),
+            resource_scale=resource_scale,
+            reference_multipliers=source_multipliers,
+        )
+        optimized_vector, optimized_mapping = proxy_multipliers(
+            profile,
+            scenario,
+            reference["result"],
+            solution["rows"],
+            resource_scale=resource_scale,
+            reference_multipliers=source_multipliers,
+        )
+        store.update(job_id, "PROXY_FIXED_POLICY_QSTS")
+        fixed = await self._builtin_qsts(
+            job_id, profile, scenario, objective, "fixed_policy_proxy", baseline_vector
+        )
+        store.update(job_id, "PROXY_OPTIMIZED_QSTS")
+        optimized = await self._builtin_qsts(
+            job_id, profile, scenario, objective, "optimized_netload_proxy", optimized_vector
+        )
+        electrical = compare_remote(fixed["result"], optimized["result"], scenario)
+        electrical["scope"] = "BUILTIN_IEEE13_NETLOAD_PROXY_AGGREGATED_RESPONSE"
+        electrical["warning"] = (
+            "OpenDSS integrado no contiene Storage/PVSystem individuales. "
+            "La comparación usa LoadMult global aproximado y no verifica consignas "
+            "ni telemetría física de BESS."
+        )
+        report = {
+            "reference_run_id": reference["run_id"],
+            "baseline_run_id": fixed["run_id"],
+            "optimized_run_id": optimized["run_id"],
+            "status": "BUILTIN_IEEE13_NETLOAD_PROXY_NOT_BESS_VALIDATION",
+            "electrical_status": (
+                "VOLTAGE_COMPLIANT_AGGREGATED_QSTS"
+                if electrical["optimized_check"]["voltage_compliant"]
+                else "VOLTAGE_VIOLATIONS_AGGREGATED_QSTS"
+            ),
+            "source_kind": "SIMULATED",
+            "validation_scope": "BUILTIN_IEEE13_NETLOAD_PROXY_NOT_BESS_VALIDATION",
+            "model_has_storage_pv": False,
+            "device_telemetry_verified": False,
+            "resource_scale": resource_scale,
+            "operational_tkg": graph_manifest,
+            "baseline_mapping": baseline_mapping,
+            "optimized_mapping": optimized_mapping,
+            "electrical": electrical,
+            "objective": solution["objective"],
+            "energy_metrics": solution["metrics"],
+            "warnings": [
+                "Se ejecutaron tres QSTS IEEE13 integrados: referencia, política fija "
+                "y equivalente agregado del despacho óptimo.",
+                "El MILP usa eventos del TKG; OpenDSS NO contiene elementos Storage/PVSystem "
+                "ni aplica consignas individuales. NO es validación eléctrica del BESS.",
+                "La curva QSTS es una aproximación por LoadMult, no un modelo DER.",
+                "max_passes se ignora en modo builtin_proxy: no se aplica realimentación "
+                "de restricciones eléctricas al MILP porque el circuito no tiene BESS.",
+            ],
+        }
+        from backend.app.services.coupled_tkg import build_coupled_graph
+
+        build_coupled_graph(store.get_run(job_id), operational_graph, report)
+        store.save_coupled_result(job_id, report)
+        export_run(store.get_run(job_id))
+        await self.manager.broadcast(
+            job_id, {"type": "coupled_completed", "status": report["status"]}
+        )
+
     async def execute(
         self,
         job_id: str,
@@ -147,12 +287,20 @@ class CoupledRunner:
         resource_scale: float = 100.0,
         max_passes: int = 2,
         events: list[dict] | None = None,
+        mode: str = "builtin_proxy",
     ) -> None:
-        """Controlador secuencial con limitación de BESS y reevaluación de seguridad."""
+        """Proxy IEEE13 integrado por defecto; DSS custom es explícitamente opcional."""
         store = self.manager.store
         run_dir = ROOT / "results/runs" / job_id
         run_dir.mkdir(parents=True, exist_ok=True)
         try:
+            if mode == "builtin_proxy":
+                await self._execute_builtin_proxy(
+                    job_id, profile, scenario, objective, resource_scale, events
+                )
+                return
+            if mode != "custom_dss":
+                raise ValueError("Modo de acoplamiento no permitido")
             await self.monitor.require_healthy()
             context, operational_graph = resolve_constraints(
                 profile, scenario, load_events() if events is None else events

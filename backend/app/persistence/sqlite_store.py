@@ -120,8 +120,13 @@ class Store:
                 raise ValueError("Corrida conjunta no confirmable")
             db.execute(
                 "UPDATE runs SET status='COUPLED_COMPLETED', updated_at=?, "
-                "remote_verification='custom_dss_aggregated_qsts', result_json=? WHERE run_id=?",
-                (utc_now(), json.dumps(report), run_id),
+                "remote_verification=?, result_json=? WHERE run_id=?",
+                (
+                    utc_now(),
+                    report.get("validation_scope", "NOT_VALIDATED"),
+                    json.dumps(report),
+                    run_id,
+                ),
             )
             db.execute("INSERT OR REPLACE INTO meta VALUES ('last_good_run',?)", (run_id,))
             db.execute("INSERT OR REPLACE INTO meta VALUES ('active_run',?)", (run_id,))

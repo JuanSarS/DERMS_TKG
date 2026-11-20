@@ -31,7 +31,11 @@ def build_coupled_graph(run: dict, operational: Graph, report: dict):
         electric = RESOURCE[f"qsts/{report['optimized_run_id']}/{index}"]
         graph.add((electric, RDF.type, TKG.QSTSStep))
         graph.add((electric, TKG.recordedAt, recorded))
-        graph.add((decision, TKG.checkedBy, electric))
+        if report["validation_scope"] == "BUILTIN_IEEE13_NETLOAD_PROXY_NOT_BESS_VALIDATION":
+            # This is a proxy for aggregate demand, NOT individual BESS verification.
+            graph.add((decision, TKG.assessedByAggregateProxy, electric))
+        else:
+            graph.add((decision, TKG.checkedBy, electric))
         matching = next((x for x in report["electrical"]["steps"] if x["step"] == index), None)
         if matching:
             for key, predicate in [

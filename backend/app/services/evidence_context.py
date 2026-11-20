@@ -69,6 +69,9 @@ def build_context(run: dict, step: int | None = None, store=None) -> dict:
                 packet["tkg"]["checked_by_uris"] = [
                     str(node) for node in graph.objects(decision, TKG.checkedBy)
                 ]
+                packet["tkg"]["aggregate_proxy_uris"] = [
+                    str(node) for node in graph.objects(decision, TKG.assessedByAggregateProxy)
+                ]
             packet["tkg"]["evaluation_status"] = list(
                 str(node)
                 for node in graph.objects(RESOURCE[f"run/{run['run_id']}"], TKG.electricalStatus)
@@ -113,11 +116,15 @@ def build_context(run: dict, step: int | None = None, store=None) -> dict:
             "voltage_check": coupled["electrical"].get("optimized_check"),
             "power_difference_kw": coupled["electrical"].get("max_abs_delta_kw"),
             "individual_storage_telemetry": coupled.get("device_telemetry_verified", False),
+            "model_has_storage_pv": coupled.get("model_has_storage_pv", False),
+            "reference_run_id": coupled.get("reference_run_id"),
+            "warnings": coupled.get("warnings", []),
         }
     packet["knowledge_limits"] = [
         "Las fuentes Ausgrid son históricas; la batería, cargas flexibles y tarifas son modeladas.",
         "El TKG operativo aporta estados de disponibilidad consultados antes del MILP.",
-        "La evaluación custom QSTS solo mide red agregada; no confirma SOC ni terminal Storage por paso.",
+        "El modo IEEE13 integrado usa multiplicadores globales como proxy agregado; NO incorpora BESS/PV físico ni verifica consignas individuales.",
+        "Solo el modo DSS personalizado intentaría aplicar Storage; necesita validación exitosa en el worker.",
         "No atribuir ahorro energético al TKG sin comparación controlada B0/B2.",
     ]
     return packet

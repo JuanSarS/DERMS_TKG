@@ -34,9 +34,11 @@ def evidence_packet(run: dict, step: int | None = None) -> dict:
         "objective": dispatch.get("objective"),
         "metrics": dispatch.get("metrics"),
         "caveat": (
-            "El QSTS remoto normal aplica solo multiplicadores globales. "
-            "En una corrida acoplada se evalúa un modelo DSS con Storage/PV "
-            "pero falta telemetría individual y sincronización de consignas verificada."
+            "El modo IEEE13 integrado representa el efecto energético mediante multiplicadores "
+            "GLOBALMENTE equivalentes de carga y NO contiene Storage/PVSystem ni valida BESS. "
+            if result.get("validation_scope") == "BUILTIN_IEEE13_NETLOAD_PROXY_NOT_BESS_VALIDATION"
+            else "El modo personalizado intenta usar Storage/PVSystem, pero la API no expone "
+            "telemetría individual ni garantiza sincronización de consignas."
         ),
     }
 

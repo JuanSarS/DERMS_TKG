@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import math
 
 from websockets.exceptions import ConnectionClosed
 
@@ -30,9 +31,27 @@ class Orchestrator:
         session_id = None
         try:
             await self.monitor.require_healthy()
-            multipliers = to_multipliers(
-                profile, scale_multiplier=scenario.get("scale_multiplier", 1)
-            )
+            # Allow only a fully validated vector; the remote API still receives its
+            # existing QSTS contract, never BESS/PV fields or custom DSS commands.
+            override = scenario.get("qsts_load_multipliers")
+            if override is None:
+                multipliers = to_multipliers(
+                    profile, scale_multiplier=scenario.get("scale_multiplier", 1)
+                )
+            else:
+                if (
+                    not isinstance(override, list)
+                    or len(override) != len(profile["records"])
+                    or any(
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not math.isfinite(value)
+                        or not 0 < value <= 5
+                        for value in override
+                    )
+                ):
+                    raise ValueError("Vector QSTS personalizado inválido")
+                multipliers = [float(value) for value in override]
             payload = SolveQSTS(
                 qsts=QSTSInput(
                     duration_hours=len(multipliers) * 0.5,

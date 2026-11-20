@@ -195,7 +195,11 @@ def test_full_coupled_orchestration_mocked(monkeypatch, tmp_path, case):
         orchestrator=FakeOrchestrator(store),
     )
     job = store.create(scenario, objective)
-    asyncio.run(runner.execute(job, profile, scenario, objective, max_passes=1, events=[]))
+    asyncio.run(
+        runner.execute(
+            job, profile, scenario, objective, max_passes=1, events=[], mode="custom_dss"
+        )
+    )
     run = store.get_run(job)
     assert run["status"] == "COUPLED_COMPLETED", run.get("error")
     assert run["result"]["electrical"]["network_response_different"] is True
